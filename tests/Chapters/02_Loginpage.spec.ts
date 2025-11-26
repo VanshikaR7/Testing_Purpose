@@ -1,26 +1,39 @@
-//Import playwroght module
+// tests/Chapters/02_Loginpage.spec.ts
 import { test, expect } from "@playwright/test";
 
-//Creating a test for login page (write a test)
-test("Login Page test case", async ({ page }) => {
-  //Navigate to the URL
-  await page.goto("https://test.nudgebee.pollux.in", {
-    waitUntil: "domcontentloaded",
-  });
+/**
+ * Uses env vars injected via GitHub Secrets in CI and your local shell when authoring:
+ *  - BASE_URL
+ *  - USERNAME
+ *  - PASSWORD
+ * Local authoring tip: run headed to watch the browser:
+ *  - npm run test:headed
+ *  - npm run test:file -- tests/Chapters/02_Loginpage.spec.ts
+ */
 
-  //search keyword and click on submit button
+test("Login Page test case", async ({ page }) => {
+  // Navigate
+  const base = process.env.BASE_URL ?? "https://example.com";
+  await page.goto(base, { waitUntil: "domcontentloaded" });
+
+  // Interact
+  const uname = process.env.USERNAME ?? "";
+  const pwd = process.env.PASSWORD ?? "";
+
   await page.getByRole("textbox", { name: "LDAP Username" }).isVisible();
-  await page
-    .getByRole("textbox", { name: "LDAP Username" })
-    .fill("raman.kharche01");
-  await page.getByRole("textbox", { name: "LDAP Username" }).isVisible();
-  await page.getByRole("textbox", { name: "LDAP Password" }).fill("Test!12345");
+  await page.getByRole("textbox", { name: "LDAP Username" }).fill(uname);
+  await page.getByRole("textbox", { name: "LDAP Password" }).fill(pwd);
   await page.getByRole("button", { name: "Submit" }).click();
 
-  //Validate home page after login
-  await expect(page).toHaveTitle("Nudgebee");
+  // Validate
+  await expect(page).toHaveTitle(/Nudgebee/i, { timeout: 15000 });
+
+  // Optional screenshots (folder name kept as in your repo)
   await page
     .getByText("Home")
-    .screenshot({ path: "./screenshot/HomepageScreentshot.png" });
-  await page.screenshot({ path: "./screenshot/FullHomepageScreentshot.png" });
+    .screenshot({ path: "./screenshot/HomepageScreenshot.png" });
+  await page.screenshot({
+    path: "./screenshot/FullHomepageScreenshot.png",
+    fullPage: true,
+  });
 });

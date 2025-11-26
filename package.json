@@ -1,14 +1,14 @@
 {
-  "name": "playwright_typescript_automation",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {},
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "scripts": {
+    "test": "playwright test",
+    "test:ci": "playwright test --reporter=html,line",
+    "test:headed": "playwright test --headed --project=chromium --workers=1",
+    "test:ui": "playwright test --ui",
+    "test:file": "playwright test --headed --project=chromium --workers=1",
+    "test:all-artifacts": "cross-env RECORD_ALL=1 playwright test --reporter=html,line"
+  },
   "devDependencies": {
-    "@playwright/test": "^1.56.1",
-    "@types/node": "^24.10.1"
+    "@playwright/test": "^1.48.2",
+    "cross-env": "^7.0.3"
   }
 }
