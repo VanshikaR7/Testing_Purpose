@@ -12,6 +12,8 @@ import { test, expect } from "@playwright/test";
  */
 
 test("Login Page test case", async ({ page }) => {
+  test.skip(!process.env.BASE_URL || process.env.BASE_URL.includes("example.com"), "Skipping test because BASE_URL is not set or is example.com");
+
   // Navigate
   const base = process.env.BASE_URL ?? "https://example.com";
   await page.goto(base, { waitUntil: "domcontentloaded" });
