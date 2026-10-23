@@ -1,0 +1,41 @@
+name: Bug Report
+description: Report something that is broken
+title: "[BUG] - "
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      description: Where does it happen?
+      options:
+        - Production
+        - Test
+        - Dev
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What is wrong, in plain language.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Numbered steps someone else can follow.
+  - type: input
+    id: link
+    attributes:
+      label: Link
+      description: The page or resource where it shows up.
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched for an existing issue first
+          required: true
