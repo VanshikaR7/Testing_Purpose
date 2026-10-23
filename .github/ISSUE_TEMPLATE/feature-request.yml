@@ -1,0 +1,34 @@
+name: Feature Request
+description: Ask for a new capability
+title: "[REQUEST] - "
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: function
+    attributes:
+      label: Function
+      description: Which area is this for?
+      options:
+        - Troubleshooting
+        - Integrations
+        - Notifications and tickets
+        - Platform
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What is missing and who needs it.
+    validations:
+      required: true
+  - type: textarea
+    id: unblocks
+    attributes:
+      label: What this unblocks
+      description: The work or deal behind the request.
+  - type: input
+    id: related
+    attributes:
+      label: Related issue
+      description: An issue number, for example #1.
